@@ -31,3 +31,15 @@ ames <- ames_raw %>%
 
 
 #### Analysis -----------------------------------------------------------------
+
+## Heat Map
+
+# Option of 'method' in app 
+
+# corrplot
+matrix <- cor(ames %>% select_if(is.numeric))
+corrplot(matrix, method = "color")
+
+# GGally 
+variables <- ames %>% select_if(is.numeric)
+ggpairs(variables)
