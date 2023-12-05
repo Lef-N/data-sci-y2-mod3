@@ -4,7 +4,7 @@ library(ggplot2)
 source("functions.R")
 
 #### Processing ---------------------------------------------------------------
-ames_raw <- read_csv("ames.csv") %>%
+ames_raw <- readr::read_csv("ames.csv") %>%
   janitor::clean_names() %>%
   select(lot_area,             
          land_contour,  
@@ -23,7 +23,7 @@ ames_raw <- read_csv("ames.csv") %>%
          yr_sold,
          sale_price)
 
-check_missing <- summarise(ames, across(everything(), ~ sum(is.na(.))))
+check_missing <- summarise(ames_raw, across(everything(), ~ sum(is.na(.))))
 
 ames <- ames_raw %>%
   mutate(garage = ifelse(is.na(garage_type), "No garage", "Garage"),
@@ -67,3 +67,6 @@ plot <- ggplot(av_price, aes(x = year_built, group = 1)) +
   geom_line(aes(y = mean), colour = "red") +
   geom_line(aes(y = mode), colour = "blue") +
   geom_line(aes(y = median), colour = "orange")
+
+test1 <- plot_average(av_price_grps, year_group, mode)
+test1
