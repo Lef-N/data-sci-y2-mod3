@@ -1,6 +1,8 @@
 #### Load packages ------------------------------------------------------------
 library(dplyr)
 library(ggplot2)
+library(GGally)
+library(corrplot)
 source("functions.R")
 
 #### Processing ---------------------------------------------------------------
