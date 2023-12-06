@@ -6,7 +6,7 @@ library(corrplot)
 source("functions.R")
 
 #### Processing ---------------------------------------------------------------
-ames_raw <- read_csv("ames.csv") %>%
+ames_raw <- readr::read_csv("ames.csv") %>%
   janitor::clean_names() %>%
   select(lot_area,             
          land_contour,  
@@ -25,7 +25,7 @@ ames_raw <- read_csv("ames.csv") %>%
          yr_sold,
          sale_price)
 
-check_missing <- summarise(ames, across(everything(), ~ sum(is.na(.))))
+check_missing <- summarise(ames_raw, across(everything(), ~ sum(is.na(.))))
 
 ames <- ames_raw %>%
   mutate(garage = ifelse(is.na(garage_type), "No garage", "Garage"),
@@ -84,4 +84,5 @@ corrplot(matrix, method = "color")
 # GGally 
 variables <- ames %>% select_if(is.numeric)
 ggpairs(variables)
+
 
