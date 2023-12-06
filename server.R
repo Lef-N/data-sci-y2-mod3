@@ -12,29 +12,33 @@ library(shiny)
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   
-  # ames <- reactive({
-  #   
-  #   data <- ames %>%
-  #     filter(
-  #       yr_sold %in% input$year_sold
-  #     )
-  #   
-  #   return(data)
-  #   
-  # })
-  
+  get_data <- reactive({
+
+    data <- ames
+
+    if (input$year_sold != "All"){
+      data <-
+        data %>%
+        filter(yr_sold == input$year_sold)
+    }
+
+    return(data)
+
+  })
+
   
   output$testPlot <- plotly::renderPlotly({
     
-    av_price_grps <- ames %>%
+    plot <- get_data() %>%
       group_by(year_group) %>%
       summarise(mean = mean(sale_price),
                 mode = getmode(sale_price),
                 median = median(sale_price),
-                count = n())
-    
-    plot_average(av_price_grps, year_group, input$y)
+                count = n()) %>%
+      plot_average(., year_group, input$y)
     
   })
+  
+})
   
 })

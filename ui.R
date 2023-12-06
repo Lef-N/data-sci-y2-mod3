@@ -23,7 +23,7 @@ shinyUI(fluidPage(
       div(icon("filter"), "Filters",
           style = "font-size: calc(1.325rem + 0.9vw); font-weight: 000;
             color: white; background-color: #12436D;
-            margin-top: -3.5%;
+            margin-top: -3.5%; margin-bottom: 3.5%;
             padding-right: 10%; padding-left: 10%;
             vertical-align: text-bottom; padding-bottom: 1%; padding-top: 1%;"),
       
@@ -31,7 +31,7 @@ shinyUI(fluidPage(
         
         column(12,
                selectInput("year_sold",
-                           label = "Year Built:",
+                           label = "Year Sold:",
                            choices = c("All",
                                        unique(ames$yr_sold)[order(unique(ames$yr_sold))]),
                            selected = "All"),
@@ -46,7 +46,7 @@ shinyUI(fluidPage(
         'y',
         selected = c("mean"),
         choices = list(
-          "mean", "mode", "median"), multiple = TRUE,
+          "mean", "mode", "median"),
         options = list(create = TRUE,
                        `actions-box` = TRUE)),
     
