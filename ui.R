@@ -46,7 +46,7 @@ shinyUI(fluidPage(
         'y',
         selected = c("mean"),
         choices = list(
-          "mean", "mode", "median"), multiple = TRUE,
+          "mean", "mode", "median"),
         options = list(create = TRUE,
                        `actions-box` = TRUE)),
     
