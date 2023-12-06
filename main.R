@@ -1,6 +1,8 @@
 #### Load packages ------------------------------------------------------------
 library(dplyr)
 library(ggplot2)
+library(GGally)
+library(corrplot)
 source("functions.R")
 
 #### Processing ---------------------------------------------------------------
@@ -42,6 +44,8 @@ ames <- ames_raw %>%
 
 #### Analysis -----------------------------------------------------------------
 
+## Line Graph 
+
 av_price_grps <- ames %>%
   group_by(year_group) %>%
   summarise(mean = mean(sale_price),
@@ -68,5 +72,17 @@ plot <- ggplot(av_price, aes(x = year_built, group = 1)) +
   geom_line(aes(y = mode), colour = "blue") +
   geom_line(aes(y = median), colour = "orange")
 
-test1 <- plot_average(av_price_grps, year_group, mode)
-test1
+
+## Heat Map
+
+# Option of 'method' in app 
+
+# corrplot
+matrix <- cor(ames %>% select_if(is.numeric))
+corrplot(matrix, method = "color")
+
+# GGally 
+variables <- ames %>% select_if(is.numeric)
+ggpairs(variables)
+
+
