@@ -31,7 +31,7 @@ shinyUI(fluidPage(
         
         column(12,
                selectInput("year_sold",
-                           label = "Year Built:",
+                           label = "Year Sold:",
                            choices = c("All",
                                        unique(ames$yr_sold)[order(unique(ames$yr_sold))]),
                            selected = "All"),
