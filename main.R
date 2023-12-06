@@ -64,7 +64,8 @@ av_price <- ames %>%
 plot_grps <- ggplot(av_price_grps, aes(x = year_group, group = 1)) +
   geom_line(aes(y = mean), colour = "red") +
   geom_line(aes(y = mode), colour = "blue") +
-  geom_line(aes(y = median), colour = "orange")
+  geom_line(aes(y = median), colour = "orange") +
+  scale_y_continuous(labels = scales::dollar_format(scale = 0.001, suffix = "K"))
   
   
 plot <- ggplot(av_price, aes(x = year_built, group = 1)) +
