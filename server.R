@@ -18,9 +18,7 @@ shinyServer(function(input, output) {
 ames <- reactive({
    
    data <- ames %>%
-     filter(
-       found %in% input$foundation
-     )
+     filter(foundation == input$foundation)
    
    return(data)
    
