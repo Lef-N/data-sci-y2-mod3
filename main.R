@@ -25,7 +25,7 @@ ames_raw <- readr::read_csv("ames.csv") %>%
          yr_sold,
          sale_price)
 
-check_missing <- summarise(ames_raw, across(everything(), ~ sum(is.na(.))))
+#check_missing <- summarise(ames_raw, across(everything(), ~ sum(is.na(.))))
 
 ames <- ames_raw %>%
   mutate(garage = ifelse(is.na(garage_type), "No garage", "Garage"),

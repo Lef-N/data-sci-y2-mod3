@@ -8,33 +8,29 @@
 #
 
 library(shiny)
+library(plotly)
+library(ggplot2)
+library(shinyWidgets)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   
-  # ames <- reactive({
-  #   
-  #   data <- ames %>%
-  #     filter(
-  #       yr_sold %in% input$year_sold
-  #     )
-  #   
-  #   return(data)
-  #   
-  # })
+ames <- reactive({
+   
+   data <- ames %>%
+     filter(
+       found %in% input$foundation
+     )
+   
+   return(data)
+   
+ })
   
-  
-  output$testPlot <- plotly::renderPlotly({
-    
-    av_price_grps <- ames %>%
-      group_by(year_group) %>%
-      summarise(mean = mean(sale_price),
-                mode = getmode(sale_price),
-                median = median(sale_price),
-                count = n())
-    
-    plot_average(av_price_grps, year_group, input$y)
-    
+  output$price_by_foundation_ts <- renderPlot({
+ 
+    #Price/Year Scatterplot visualisation with shapes
+    ggplot(ames, aes(x = year_built, y = sale_price)) +
+      geom_line() +
+      geom_point(size = 2)
   })
-  
 })
